@@ -3,6 +3,7 @@ package com.nam.migi_service.controller;
 import com.nam.migi_service.dto.request.ApiResponse;
 import com.nam.migi_service.dto.request.UserCreationRequest;
 import com.nam.migi_service.dto.request.UserUpdateRequest;
+import com.nam.migi_service.dto.response.UserResponse;
 import com.nam.migi_service.entity.User;
 import com.nam.migi_service.service.UserService;
 import jakarta.validation.Valid;
@@ -21,7 +22,7 @@ public class UserController {
     ApiResponse<User> createUser(@RequestBody @Valid UserCreationRequest request) {
         ApiResponse<User> apiResponse = new ApiResponse<>();
 
-        apiResponse.setResult(userService.createRequest(request));
+        apiResponse.setResult(userService.createUser(request));
         return apiResponse;
     }
 
@@ -31,12 +32,12 @@ public class UserController {
     }
 
     @GetMapping("/{userId}")
-    User getUserById(@PathVariable("userId") String userId) {
+    UserResponse getUserById(@PathVariable("userId") String userId) {
         return userService.getUserById(userId);
     }
 
     @PutMapping("/{userId}")
-    User updateUser(@PathVariable String userId, @RequestBody UserUpdateRequest request) {
+    UserResponse updateUser(@PathVariable String userId, @RequestBody UserUpdateRequest request) {
         return userService.updateUser(userId, request);
     }
 
